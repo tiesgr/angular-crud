@@ -1,0 +1,46 @@
+<mat-form-field appearance="standard">
+    <mat-label>Φίλτρο</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Α.Μ., Όνομα, Επώνυμο, Σήμα" #input>
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Αρ. Μητρώου">
+      <th mat-header-cell *matHeaderCellDef> Αρ. Μητρώου </th>
+      <td mat-cell *matCellDef="let element"> {{element.am}} </td>
+    </ng-container>
+  
+    <!-- Name and SurnameColumn -->
+    <ng-container matColumnDef="Όνομα και Επώνυμο">
+      <th mat-header-cell *matHeaderCellDef> Όνοματεπώνυμο </th>
+      <td mat-cell *matCellDef="let element"> {{element.name + ' ' + element.surname}} </td>
+    </ng-container>
+  
+  
+    <!-- Κωδ. Σήματος Column -->
+    <ng-container matColumnDef="Κωδ. Σήματος">
+      <th mat-header-cell *matHeaderCellDef> Κωδ. Σήματος </th>
+      <td mat-cell *matCellDef="let element; let i = index"> <a matLine [routerLink]="['employee:i']">{{element.brandCode}} </a></td>
+    </ng-container>
+  
+    <!-- Όνομα Σήματος Column -->
+    <ng-container matColumnDef="Όνομα Σήματος">
+      <th mat-header-cell *matHeaderCellDef> Όνομα Σήματος </th>
+      <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+    </ng-container>
+  
+    <!-- Ποσότητα Column -->
+    <ng-container matColumnDef="Ποσότητα">
+      <th mat-header-cell *matHeaderCellDef> Ποσότητα </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
