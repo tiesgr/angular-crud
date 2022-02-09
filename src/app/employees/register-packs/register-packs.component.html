@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <mat-form-field appearance="standard">
+            <mat-label>Φίλτρο</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Α.Μ., Όνομα, Επώνυμο"
+              #input
+            />
+          </mat-form-field>
+      
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Αρ. Μητρώου">
+              <th mat-header-cell *matHeaderCellDef>Αρ. Μητρώου</th>
+              <td mat-cell *matCellDef="let element">{{ element.am }}</td>
+            </ng-container>
+      
+            <!-- Name and SurnameColumn -->
+            <ng-container matColumnDef="Όνομα και Επώνυμο">
+              <th mat-header-cell *matHeaderCellDef>Όνοματεπώνυμο</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name + " " + element.surname }}
+              </td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="assignPacks(row)"
+            ></tr>
+      
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                Δεν υπάρχουν δεδομένα με την αναζήτηση "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+      </div>
+      <div class="col" *ngIf="startAssign">
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Προσθήκη Κούτας/Πακέτων</mat-label>
+              <input
+                matInput
+                placeholder="π.χ. 0105201333666993215XPECGFWEB19"          
+              />
+            </mat-form-field>
+          </form>
+      </div>      
+    </div>
+  </div>

@@ -9,6 +9,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { NgMaterialModule } from './ng-material/ng-material.module';
 import { HeaderComponent } from './header/header.component';
 import { EmployeeComponent } from './employees/employee/employee.component';
+import { RegisterPacksComponent } from './employees/register-packs/register-packs.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EmployeeComponent } from './employees/employee/employee.component';
     EmployeesComponent,
     SidenavComponent,
     HeaderComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    RegisterPacksComponent
   ],
   imports: [
     BrowserModule,
