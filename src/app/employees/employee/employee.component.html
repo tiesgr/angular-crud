@@ -1,1 +1,48 @@
-<p>employee works!</p>
+<div *ngIf="employees">
+  <h1 class="display-3">
+    {{ employees.name + " " + employees.surname }} - {{ employees.am }}
+  </h1>
+  <h2>Κατάσταση παραλαβών τσιγάρων</h2>
+  <table class="table table-hover table1">
+    <!-- Position Column -->
+
+    <tr>
+      <th scope="col">Ημ/νια παραλαβής</th>
+      <th scope="col">Κωδ.Sap Σήματος</th>
+      <th scope="col">Περιγραφή σήματος</th>
+      <th scope="col">Ποσότητα Πακέτων</th>
+    </tr>
+    <tr *ngIf="employee" (click)="viewAssigned(employee.am)">
+      <!-- Ημ/νία Παραλαβής -->
+      <td>{{ employee.dateReceived | date: "dd/MM/yy HH:mm" }}</td>
+      <!-- Κωδ. Σήματος Column -->
+      <td>{{ employee.brandCode }}</td>
+      <!-- Όνομα Σήματος Column -->
+      <td>{{ employee.brandName }}</td>
+      <!-- Ποσότητα Πακέτων -->
+      <td>{{ employee.quantity }}</td>
+    </tr>
+  </table>
+  <div class="row" *ngIf="viewMore">
+    <div *ngIf="assignedBundle">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Κωδικός Κούτας</th>
+            <th scope="col">Πακέτα</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let o of assignedBundle">
+          <tr *ngFor="let b of o.bundle; let i = index">
+            <th>{{ b.code }}</th>
+            <td *ngFor="let p of b.packets">{{ p }}</td>
+          </tr>
+          <tr>
+            <th *ngIf="o.packetsOnly">Μόνο Πακέτα</th>
+            <td>{{ o.packetsOnly }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
